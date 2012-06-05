@@ -1,0 +1,8 @@
+<html>
+<body>
+<form action="/<%= $id %>/login" method="post">
+  Passwort f&uuml;r Notepad <%= $id %>: <input type="password" name="notepad_passwd" /><br />
+  <button type="submit" value="Einloggen">Einloggen</button>
+</form>
+</body>
+</html>

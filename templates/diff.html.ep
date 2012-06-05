@@ -1,0 +1,7 @@
+<html>
+<body>
+<%= $diff %>
+<br /><br />
+<a href="/<%= $id %>">Zur&uuml;ck zum Notepad</a>
+</body>
+</html>

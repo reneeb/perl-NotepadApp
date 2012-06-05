@@ -1,0 +1,23 @@
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="/js/markitup/skins/markitup/style.css" />
+<link rel="stylesheet" type="text/css" href="/js/markitup/sets/markdown/style.css" />
+<script type="text/javascript" src="/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="/js/markitup/jquery.markitup.js"></script>
+<script type="text/javascript" src="/js/markitup/sets/markdown/set.js"></script>
+
+<script language="javascript">
+$(document).ready(function()    {
+    $('#markdown').markItUp(myMarkdownSettings);
+});
+</script>
+</head>
+<body>
+<h1><%= $title %></h1>
+<textarea id="markdown" cols="80" rows="20"><%= Mojo::ByteStream->new( $body ) %></textarea><br />
+Dein Name (optional): <input type="text" name="author" /><br />
+Kommentar zu den &Auml;nderungen: <input type="text" name="commit_message" /><br />
+<button type="submit" value="Notepad speichern">Notepad speichern</button>
+</form>
+</body>
+</html>
