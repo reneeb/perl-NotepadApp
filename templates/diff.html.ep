@@ -1,6 +1,11 @@
 <html>
+<head>
+    <style type="text/css">
+        #diff_body { white-space: pre }
+    </style>
+</head>
 <body>
-<%= $diff %>
+<div id="diff_body"><%= Mojo::ByteStream->new( $diff ) %></div>
 <br /><br />
 <a href="/<%= $id %>">Zur&uuml;ck zum Notepad</a>
 </body>

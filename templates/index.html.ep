@@ -2,6 +2,7 @@
 <body>
 <form action="/" method="post">
     Name des Notepads: <input type="text" name="title" /><br />
+    Ihr Name (optional): <input type="text" name="owner" /><br />
     Passwort (falls gew&uuml;nscht): <input type="password" name="notepad_passwd" /><br />
     Kommentar: <input type="text" name="comment" /><br />
     <button type="submit" value="Notepad erstellen">Notepad erstellen</button>

@@ -14,7 +14,8 @@ $(document).ready(function()    {
 </head>
 <body>
 <h1><%= $title %></h1>
-<textarea id="markdown" cols="80" rows="20"><%= Mojo::ByteStream->new( $body ) %></textarea><br />
+<form action="/<%= $id %>/save" method="post">
+<textarea id="markdown" cols="80" rows="20" name="body"><%= Mojo::ByteStream->new( $body ) %></textarea><br />
 Dein Name (optional): <input type="text" name="author" /><br />
 Kommentar zu den &Auml;nderungen: <input type="text" name="commit_message" /><br />
 <button type="submit" value="Notepad speichern">Notepad speichern</button>

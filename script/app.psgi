@@ -28,10 +28,26 @@ post '/' => sub {
     my ($self) = shift;
 
     my $id = create_notepad( $self ) || '';
-    return $self->redirect_to( '/' . $id );
+    return $self->redirect_to( '/' . $id . '/edit' );
 };
 
 post '/:id/login' => sub {
+    my $self = shift;
+
+    my $is_authorized = check_authentication( $self );
+
+    my $mode = $is_authorized ? '' : 'login';
+
+    my $id  = $self->stash->{id};
+    my $url = sprintf "/%s/%s", $id, $mode;
+
+    return $self->redirect_to( $url );
+};
+
+get '/:id/login' => sub {
+    my $self = shift;
+
+    $self->render( 'login' );
 };
 
 under sub {
@@ -39,7 +55,9 @@ under sub {
 
     return 1 if is_authenticated( $self );
 
-    my $id = $self->param( 'id' );
+    my $id = $self->url_for;
+    $id =~ s/[^a-zA-Z0-9]//g;
+
     $self->stash( id => $id );
     $self->render( 'login' );
     return;
@@ -80,12 +98,12 @@ post '/:id/save' => sub {
     return $self->redirect_to( '/' . $id );
 };
 
-post '/:id/diff' => sub {
+get '/:id/changes/:commit' => sub {
     my $self = shift;
 
-    my $id     = $self->param( 'id' );
-    my $params = $self->req->param->to_hash || {};
-    my $diff   = get_diff( $id, $params, { format => 'html' } );
+    my $id      = $self->stash->{id};
+    my $commit  = $self->stash->{commit};
+    my $diff    = get_diff( $id, $commit, { format => 'html' } );
 
     $self->stash( diff => $diff, id => $id );
     $self->render( 'diff' );

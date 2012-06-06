@@ -1,17 +1,6 @@
 % my $s = $self->stash;
 <html>
 <head>
-<link rel="stylesheet" type="text/css" href="/markitup/skins/markitup/style.css" />
-<link rel="stylesheet" type="text/css" href="/markitup/sets/markdown/style.css" />
-<script type="text/javascript" src="jquery.js"></script>
-<script type="text/javascript" src="markitup/jquery.markitup.js"></script>
-<script type="text/javascript" src="markitup/sets/markdown/set.js"></script>
-
-<script language="javascript">
-$(document).ready(function()	{
-    $('#markdown').markItUp(myMarkdownSettings);
-});
-</script>
 </head>
 <body>
 <h1><%= $s->{title} %></h1>
@@ -20,13 +9,11 @@ $(document).ready(function()	{
 <a href="/<%= $id %>/edit">bearbeiten</a>
 <hr />
 <h2>Historie</h2>
-<form action="/<%= $id %>/diff" method="post">
 <ul>
   <% for my $item ( @{ $history } ) { %>
-  <li><input type="checkbox" name="history" value="<%= $item->{hash} %>" /> <%= $item->{author} %> (<%= $item->{date} %>)</li>
+  <li><%= $item->{author} %> (<%= $item->{date} %>) - <a href="/<%= $id %>/changes/<%= $item->{hash} %>">&Auml;nderungen</a></li>
   <% } %>
 </ul>
-<button type="submit" value="Diff anzeigen">Diff anzeigen</button>
 </form>
 </body>
 </html>
